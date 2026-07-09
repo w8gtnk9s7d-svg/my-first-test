@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>梔久書舖｜閱讀・收藏・與美好不期而遇</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- 建議字體 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/*=========================
+  Color Palette
+==========================*/
+
+:root{
+
+    --bg:#f8f4ee;
+    --paper:#fcfaf7;
+    --paper2:#f6f1ea;
+
+    --brown:#5d4d42;
+    --brown-light:#8a7768;
+
+    --green:#8c9a83;
+    --green-dark:#6b7963;
+
+    --line:#e6dfd7;
+
+    --shadow:0 10px 28px rgba(80,60,40,.08);
+
+    --radius:18px;
+
+}
+
+/*=========================
+  Reset
+==========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Noto Sans TC",sans-serif;
+    background:var(--bg);
+    color:var(--brown);
+
+    line-height:1.8;
+    letter-spacing:.06em;
+
+    overflow-x:hidden;
+
+}
+
+/*=========================
+ Paper Texture
+==========================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.45),transparent 35%),
+
+    radial-gradient(circle at 80% 40%,rgba(255,255,255,.22),transparent 40%),
+
+    repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,.025) 0px,
+    rgba(255,255,255,.025) 2px,
+    transparent 2px,
+    transparent 6px
+    ),
+
+    repeating-linear-gradient(
+    -45deg,
+    rgba(0,0,0,.012) 0px,
+    rgba(0,0,0,.012) 1px,
+    transparent 1px,
+    transparent 5px
+    );
+
+    opacity:.55;
+    pointer-events:none;
+    z-index:-1;
+
+}
+
+/*=========================
+ Layout
+==========================*/
+
+.container{
+
+    width:min(1200px,92%);
+    margin:auto;
+
+}
+
+/*=========================
+ Navbar
+==========================*/
+
+nav{
+
+    padding:28px 0;
+
+}
+
+.nav-wrap{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.logo{
+
+    font-family:"Noto Serif TC",serif;
+    font-size:34px;
+    letter-spacing:.16em;
+
+}
+
+.menu{
+
+    display:flex;
+    gap:38px;
+
+}
+
+.menu a{
+
+    color:var(--brown);
+    text-decoration:none;
+    font-size:15px;
+    transition:.35s;
+
+}
+
+.menu a:hover{
+
+    color:var(--green-dark);
+
+}
+
+/*=========================
+ Hero
+==========================*/
+
+.hero{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+
+    align-items:center;
+
+    padding:70px 0 90px;
+
+}
+
+.hero h1{
+
+    font-family:"Noto Serif TC",serif;
+
+    font-size:64px;
+
+    line-height:1.2;
+
+    letter-spacing:.18em;
+
+    margin-bottom:25px;
+
+}
+
+.subtitle{
+
+    font-size:20px;
+
+    color:var(--brown-light);
+
+    margin-bottom:28px;
+
+}
+
+.hero p{
+
+    color:#7d7168;
+
+    max-width:520px;
+
+}
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:40px;
+
+    background:var(--green);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 34px;
+
+    border-radius:999px;
+
+    transition:.35s;
+
+}
+
+.btn:hover{
+
+    background:var(--green-dark);
+
+    transform:translateY(-2px);
+
+}
+
+.hero-image{
+
+    background:linear-gradient(145deg,#efe6dc,#d9c6b1);
+
+    height:470px;
+
+    border-radius:26px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* wooden desk */
+
+.desk{
+
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:125px;
+
+    background:#8a6548;
+
+}
+
+/* lamp */
+
+.lamp{
+
+    position:absolute;
+    right:105px;
+    bottom:110px;
+}
+
+.lamp .pole{
+
+    width:5px;
+    height:155px;
+    background:#3f3832;
+    margin:auto;
+}
+
+.lamp .head{
+
+    width:72px;
+    height:42px;
+    background:#444;
+
+    border-radius:70px 70px 12px 12px;
+
+    transform:translate(-14px,-190px) rotate(-18deg);
+
+}
+
+.lamp .base{
+
+    width:72px;
+    height:12px;
+    background:#444;
+
+    border-radius:30px;
+
+    margin-top:-20px;
+
+}
+
+/* book */
+
+.book{
+
+    position:absolute;
+    left:120px;
+    bottom:95px;
+
+    width:135px;
+    height:88px;
+
+    background:#efe7db;
+
+    border-radius:6px;
+
+    transform:rotate(-4deg);
+
+    box-shadow:0 6px 15px rgba(0,0,0,.12);
+
+}
+
+.book::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    width:2px;
+
+    top:0;
+    bottom:0;
+
+    background:#d8c7b8;
+
+}
+
+.cup{
+
+    position:absolute;
+
+    left:285px;
+
+    bottom:120px;
+
+    width:54px;
+
+    height:54px;
+
+    background:white;
+
+    border-radius:0 0 12px 12px;
+
+}
+
+.cup::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:-12px;
+    top:15px;
+
+    width:14px;
+    height:18px;
+
+    border:3px solid white;
+
+    border-left:none;
+
+    border-radius:0 12px 12px 0;
+
+}
+
+.steam{
+
+    position:absolute;
+
+    left:304px;
+    bottom:178px;
+
+    width:2px;
+    height:50px;
+
+    background:linear-gradient(transparent,rgba(255,255,255,.9));
+
+    filter:blur(2px);
+
+}
+
+/*=========================
+ Section
+==========================*/
+
+.section-title{
+
+    font-family:"Noto Serif TC",serif;
+
+    text-align:center;
+
+    font-size:36px;
+
+    letter-spacing:.15em;
+
+    margin-bottom:14px;
+
+}
+
+.section-sub{
+
+    text-align:center;
+
+    color:var(--brown-light);
+
+    margin-bottom:60px;
+
+}
+
+/*=========================
+ Grid
+==========================*/
+
+.book-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin-bottom:90px;
+
+}
+
+.card{
+
+    background:rgba(255,255,255,.72);
+
+    backdrop-filter:blur(6px);
+
+    border:1px solid rgba(255,255,255,.5);
+
+    border-radius:var(--radius);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    transition:.45s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 22px 40px rgba(60,45,35,.15);
+
+}
+
+.cover{
+
+    height:240px;
+
+    background:
+    linear-gradient(135deg,#e9efe8,#d6d7d0);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:"Noto Serif TC";
+
+    color:#8f918d;
+
+    font-size:18px;
+
+}
+
+.card-body{
+
+    padding:24px;
+
+}
+
+.card h3{
+
+    font-family:"Noto Serif TC";
+
+    margin-bottom:10px;
+
+    font-size:23px;
+
+    letter-spacing:.08em;
+
+}
+
+.card p{
+
+    color:#807367;
+
+    font-size:15px;
+
+}
+
+.tag{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    background:#eef2ea;
+
+    color:var(--green-dark);
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+}
+
+/*=========================
+ Footer
+==========================*/
+
+footer{
+
+    border-top:1px solid var(--line);
+
+    padding:60px 0;
+
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:40px;
+
+}
+
+.footer-logo{
+
+    font-family:"Noto Serif TC";
+
+    font-size:34px;
+
+    letter-spacing:.16em;
+
+    margin-bottom:20px;
+
+}
+
+footer h4{
+
+    margin-bottom:16px;
+
+}
+
+footer ul{
+
+    list-style:none;
+
+}
+
+footer li{
+
+    margin-bottom:10px;
+
+    color:#86786d;
+
+}
+
+.copy{
+
+    text-align:center;
+
+    margin-top:60px;
+
+    color:#9b8f84;
+
+    font-size:14px;
+
+}
+
+/*=========================
+ Mobile
+==========================*/
+
+@media (max-width:960px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+}
+
+.hero-image{
+
+order:-1;
+
+height:360px;
+
+}
+
+.book-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media (max-width:640px){
+
+.logo{
+
+font-size:28px;
+
+}
+
+.menu{
+
+display:none;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.book-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.section-title{
+
+font-size:30px;
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="container nav-wrap">
+
+<div class="logo">梔久書舖</div>
+
+<div class="menu">
+<a href="#">首頁</a>
+<a href="#">書籍選物</a>
+<a href="#">閱讀札記</a>
+<a href="#">關於我們</a>
+</div>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero container">
+
+<div>
+
+<h1>梔久書舖</h1>
+
+<div class="subtitle">
+閱讀・收藏・與美好不期而遇
+</div>
+
+<p>
+我們相信，每一本書都是時間留下的溫度。
+在安靜的閱讀時光裡，
+讓故事陪伴你走過每一段人生旅程。
+</p>
+
+<a href="#" class="btn">開始探索</a>
+
+</div>
+
+<div class="hero-image">
+
+<div class="lamp">
+<div class="head"></div>
+<div class="pole"></div>
+<div class="base"></div>
+</div>
+
+<div class="book"></div>
+
+<div class="cup"></div>
+
+<div class="steam"></div>
+
+<div class="desk"></div>
+
+</div>
+
+</section>
+
+<section class="container">
+
+<h2 class="section-title">
+精選書籍
+</h2>
+
+<p class="section-sub">
+九本值得收藏的閱讀時光
+</p>
+
+<div class="book-grid">
+
+<script>
+
+const books=[
+["記憶的溫度","那些留在心中的微光。"],
+["山裡來的信","一封寫給生活的信。"],
+["日常之詩","平凡裡藏著幸福。"],
+["午後書桌","閱讀午後的陽光。"],
+["老屋時光","收藏歲月留下的故事。"],
+["我的遠方","每個人都有一處歸宿。"],
+["霧林綠意","走進森林深處。"],
+["食物與記憶","味道是最深刻的故事。"],
+["光的旅程","追尋心中的方向。"]
+];
+
+document.write(
+books.map(b=>`
+<div class="card">
+
+<div class="cover">
+BOOK
+</div>
+
+<div class="card-body">
+
+<h3>${b[0]}</h3>
+
+<p>${b[1]}</p>
+
+<div class="tag">
+文學散文
+</div>
+
+</div>
+
+</div>
+`).join("")
+);
+
+</script>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<div class="footer-logo">
+梔久書舖
+</div>
+
+<p>
+閱讀是一場溫柔而漫長的旅行，
+願每一本書都陪伴你走進更好的自己。
+</p>
+
+</div>
+
+<div>
+
+<h4>聯絡我們</h4>
+
+<ul>
+
+<li>hello@zhijiu.com</li>
+
+<li>02-1234-5678</li>
+
+<li>台北市閱讀街 123 號</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h4>網站導覽</h4>
+
+<ul>
+
+<li>首頁</li>
+
+<li>最新消息</li>
+
+<li>書籍選物</li>
+
+<li>會員中心</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="copy">
+
+© 2026 梔久書舖 Zhijiu Bookshop. All Rights Reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
